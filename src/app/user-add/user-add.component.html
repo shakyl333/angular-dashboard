@@ -1,0 +1,96 @@
+<div class="container">
+    <h2>User Add form</h2>
+<form #userForm="ngForm" (ngSubmit)="save(userForm.value, userForm.valid)" class="form-horizontal">
+
+  <div class="form-group">
+      <label class="col-xs-3 control-label">First Name</label>
+      <div class="col-xs-4">
+          <input type="text" class="form-control" id="fname" required [(ngModel)]="user.fname" name="fname" #fname="ngModel">
+      </div>
+      <div *ngIf="(fname.errors && userForm.submitted)" class="alert alert-danger">
+        <div class="col-xs-5 messageContainer" [hidden]="!fname.errors.required">
+          First Name is required!
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">Last Name</label>
+    <div class="col-xs-4">
+      <input type="text" class="form-control" id="lname" required [(ngModel)]="user.lname" name="lname" #lname="ngModel">
+    </div>
+    <div *ngIf="(lname.errors && userForm.submitted)" class="alert alert-danger">
+      <div class="col-xs-5 messageContainer" [hidden]="!lname.errors.required">
+        Last Name is required!
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">Email</label>
+    <div class="col-xs-4">
+      <input type="text" class="form-control" id="email" required [(ngModel)]="user.email" name="email" #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$">
+    </div>
+    <div *ngIf="(email.errors && userForm.submitted)" class="alert alert-danger">
+      <div class="col-xs-5 messageContainer" [hidden]="!email.errors.required">
+        Email Name is required!
+      </div>
+      <div class="col-xs-5 messageContainer" [hidden]="!email.errors.pattern">
+        Email is not valid!
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">Mobile no.</label>
+    <div class="col-xs-4">
+      <input type="text" required class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" #phone="ngModel" maxlength="10">
+    </div>
+    <div *ngIf="(phone.errors && userForm.submitted)" class="alert alert-danger">
+      <div class="col-xs-5 messageContainer" [hidden]="!phone.errors.required">
+        Mobile no. Name is required!
+      </div>
+      <div class="col-xs-5 messageContainer" [hidden]="!phone.errors.maxlength">
+        Mobile no. is not valid! Please enter 10 digit Mobile no.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">Password</label>
+    <div class="col-xs-4">
+      <input type="text" required class="form-control" maxlength="20" id="password" [(ngModel)]="user.password" name="password" #password="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}">
+    </div>
+    <div *ngIf="(password.errors && userForm.submitted)" class="alert alert-danger">
+      <div class="col-xs-5 messageContainer" [hidden]="!password.errors.required">
+        password is required!
+      </div>
+      <div class="col-xs-5 messageContainer" [hidden]="!password.errors.maxlength">
+        password cannot be more than 20 characters long!
+      </div>
+      <div class="col-xs-5 messageContainer" [hidden]="!password.errors.pattern">
+        Password must have minimum eight characters, at least one letter, one number and one special character
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label">Repeat Password</label>
+    <div class="col-xs-4">
+      <input type="text" validateEqual="password" class="form-control" id="repeatpassword" [(ngModel)]="user.repeatpassword" name="repeatpassword" #repeatpassword="ngModel">
+    </div>
+    <div *ngIf="(repeatpassword.errors && userForm.submitted)" class="alert alert-danger">
+      <div class="col-xs-5 messageContainer" *ngIf="repeatpassword.value != password.value">
+        Password missmatch
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-xs-9 col-xs-offset-3">
+          <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+  </div>
+  
+</form>
+</div>
